@@ -1,0 +1,706 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #0072b5; /* 青岛海洋蓝 */
+  --secondary-color: #f3a340; /* 啤酒黄 */
+  --dark-gray: #333;
+  --medium-gray: #666;
+  --light-gray: #f0f2f5;
+  --white: #fff;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: 'Noto Sans SC', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-gray);
+  background-color: var(--light-gray);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 头部样式 */
+.header {
+  background: linear-gradient(to right, rgba(0, 114, 181, 0.9), rgba(0, 93, 158, 0.8)), 
+              url('https://images.unsplash.com/photo-1523631211945-e07555421ff7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') center/cover;
+  color: var(--white);
+  padding: 60px 0;
+  text-align: center;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::after {
+  content: "";
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.2' d='M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,117.3C672,107,768,117,864,138.7C960,160,1056,192,1152,202.7C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") bottom/contain no-repeat;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.header .subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.weather-forecast {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.weather-day {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  backdrop-filter: blur(5px);
+}
+
+.weather-day .day {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.print-button {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.print-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* 主要内容区域 */
+.section {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  margin: 25px 0;
+  padding: 30px;
+  box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.section h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+}
+
+.section h2 i {
+  margin-right: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.3rem;
+}
+
+.section h3 {
+  color: var(--medium-gray);
+  margin: 15px 0 10px;
+  font-size: 1.3rem;
+}
+
+/* 卡片样式 */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  border: 1px solid #eee;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-header i {
+  margin-right: 8px;
+}
+
+.card-body {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.card-footer {
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  font-size: 0.9rem;
+  color: var(--medium-gray);
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.card-footer i {
+  margin-right: 5px;
+  color: var(--primary-color);
+}
+
+/* 交通卡片特殊样式 */
+.transport-card {
+  position: relative;
+}
+
+.transport-card.recommended::after {
+  content: "推荐";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.transport-info {
+  margin: 10px 0;
+}
+
+.transport-info div {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.transport-info i {
+  width: 20px;
+  color: var(--primary-color);
+  margin-right: 10px;
+}
+
+/* 行程安排样式 */
+.itinerary-day {
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.day-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.day-header:hover {
+  background-color: #005d9e;
+}
+
+.day-header i {
+  transform: rotate(0);
+  transition: transform 0.3s ease;
+}
+
+.day-header.active i {
+  transform: rotate(180deg);
+}
+
+.day-content {
+  display: none;
+  padding: 20px;
+}
+
+.day-content.active {
+  display: block;
+}
+
+.time-slot {
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.time-slot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10px;
+  height: 100%;
+  width: 2px;
+  background-color: var(--primary-color);
+  opacity: 0.4;
+}
+
+.time-slot h4 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.time-slot h4::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+.activity {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.activity-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--dark-gray);
+}
+
+.activity-info {
+  color: var(--medium-gray);
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.activity-info span {
+  display: flex;
+  align-items: center;
+}
+
+.activity-info i {
+  margin-right: 5px;
+  color: var(--primary-color);
+}
+
+/* 表格样式 */
+.table-container {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* 提示与贴士 */
+.tips-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tip-card {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-left: 3px solid var(--primary-color);
+}
+
+.tip-card h4 {
+  padding: 15px;
+  background-color: #f5f7fa;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.tip-card h4 i {
+  margin-right: 10px;
+}
+
+.tip-card-content {
+  padding: 15px;
+}
+
+.tip-card-content ul {
+  list-style-type: none;
+}
+
+.tip-card-content li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tip-card-content li i {
+  color: var(--primary-color);
+  margin-right: 10px;
+  min-width: 16px;
+  margin-top: 4px;
+}
+
+/* 食物推荐样式 */
+.food-category {
+  margin-bottom: 25px;
+}
+
+.food-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.food-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+
+.food-icon {
+  background-color: var(--secondary-color);
+  color: white;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.food-details {
+  flex: 1;
+}
+
+.food-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--dark-gray);
+}
+
+.food-description {
+  color: var(--medium-gray);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.food-location {
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+}
+
+.food-location i {
+  margin-right: 5px;
+  color: var(--primary-color);
+}
+
+/* 底部样式 */
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--medium-gray);
+  font-size: 0.9rem;
+  margin-top: 30px;
+}
+
+.footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .header {
+    padding: 40px 0;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .section {
+    padding: 20px;
+    margin: 15px 0;
+  }
+  
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .tips-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .weather-forecast {
+    flex-wrap: wrap;
+  }
+  
+  .print-button {
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+  
+  body {
+    background-color: white;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+  
+  .print-button {
+    display: none;
+  }
+  
+  .header {
+    background: white !important;
+    color: black;
+    box-shadow: none;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    text-align: center;
+    /* 页面顶部添加虚线裁切边框 */
+    border-top: 1px dashed #ccc;
+    border-radius: 0;
+  }
+  
+  .header::after {
+    display: none;
+  }
+  
+  .header h1 {
+    color: black;
+  }
+  
+  .header .subtitle {
+    color: #333;
+  }
+  
+  .weather-forecast {
+    justify-content: center;
+  }
+  
+  .weather-day {
+    background-color: white;
+    border: 1px solid #eee;
+    color: black;
+  }
+  
+  .section {
+    background: white;
+    box-shadow: none;
+    border: 1px solid #eee;
+    margin: 15px 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  .section h2 {
+    color: black;
+  }
+  
+  .section h2 i {
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .card-header {
+    background-color: #f5f5f5;
+    color: black;
+  }
+  
+  .transport-card.recommended::after {
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+  }
+  
+  .day-header {
+    background-color: #f5f5f5;
+    color: black;
+  }
+  
+  .day-content {
+    display: block !important;
+  }
+  
+  .day-header i {
+    display: none;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f5f5f5;
+    color: black;
+  }
+  
+  /* 添加页面底部裁切线 */
+  .footer {
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 20px;
+  }
+  
+  /* 所有链接显示黑色，不带下划线 */
+  a {
+    color: black !important;
+    text-decoration: none !important;
+  }
+  
+  /* 确保所有颜色都转换为黑白 */
+  * {
+    color: black !important;
+    background-color: white !important;
+    box-shadow: none !important;
+  }
+  
+  /* 重要内容加粗显示 */
+  .highlight, .card-header, .day-header, .activity-name, .food-name {
+    font-weight: bold !important;
+  }
+  
+  /* 图标可见性 */
+  i {
+    display: inline-block !important;
+    border: none !important;
+  }
+  
+  /* 确保食物卡片在打印时正确显示 */
+  .food-icon {
+    border: 1px solid #ddd !important;
+  }
+  
+  /* 移除所有浮动和定位效果 */
+  * {
+    position: static !important;
+    float: none !important;
+    transform: none !important;
+  }
+} 
