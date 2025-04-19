@@ -3,4 +3,5 @@
 
 ### MCP
 
-[高德 MCP + Cursor 开发旅游助手](mcp/高德 MCP + Cursor 开发旅游助手/)
+[高德 MCP + Cursor 开发旅游助手](mcp/高德 MCP + Cursor 开发旅游助手/高德 MCP + Cursor 开发旅游助手.md)
+
