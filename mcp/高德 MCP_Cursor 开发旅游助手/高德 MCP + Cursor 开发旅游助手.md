@@ -10,6 +10,7 @@ Model Context Protocol （MCP） 即模型上下文协议，MCP 通过提供标�
 
 [MCP学习资料](https://guangzhengli.com/blog/zh/model-context-protocol)
 
+[DeepLearning的MCP课程](https://learn.deeplearning.ai/courses/mcp-build-rich-context-ai-apps-with-anthropic/lesson/fkbhh/introduction)
 
 
 ### 二、智能旅游助手开发全流程
